@@ -57,3 +57,6 @@ if __name__ == '__main__':
                                    num_beams, temperature, top_k, top_p,
                                    do_sample)
     print(f"inference_results:{inference_results}")
+    print(type(inference_results))
+    ans = inference_results.strip("#").strip()
+    print(f"ans:{ans}")

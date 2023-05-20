@@ -88,7 +88,9 @@ class Inferencer:
             )[0]
         generated_text = self.tokenizer.decode(
             output_ids, skip_special_tokens=True)
-        # print(f"generated_text:{generated_text}")
+        print("______________begin generated_text_____________")
+        print(f"generated_text:{generated_text}")
+        print("______________end generated_text_____________")
         result = generated_text.split(response_split)[-1].strip()
         return result
 

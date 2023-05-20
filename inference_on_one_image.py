@@ -26,7 +26,7 @@ if __name__ == '__main__':
     max_new_token = 512
     num_beams = 3
     temperature = 1
-    top_k = 20
+    top_k = 1
     top_p = 1
     do_sample = True
 

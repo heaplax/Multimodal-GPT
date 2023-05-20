@@ -56,4 +56,4 @@ if __name__ == '__main__':
     inference_results = inferencer(inputs, image_paths, max_new_token,
                                    num_beams, temperature, top_k, top_p,
                                    do_sample)
-    print(inference_results)
+    print(f"inference_results:{inference_results}")

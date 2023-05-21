@@ -4,10 +4,15 @@ from vqa_eval import VQAEval
 from vqa import VQA
 
 clevr_path = "/nobackup/users/zfchen/zt/clevr/CLEVR_v1.0"
-result_file_path = "/nobackup/users/zfchen/zt/Multimodal-GPT/result_file.json"
-ann_file_path = "/nobackup/users/zfchen/zt/Multimodal-GPT/ann_file.json"
-ques_file_path = "/nobackup/users/zfchen/zt/Multimodal-GPT/ques_file.json"
-output_path = "/nobackup/users/zfchen/zt/Multimodal-GPT/output.json"
+# result_file_path = "/nobackup/users/zfchen/zt/Multimodal-GPT/result_file.json"
+# ann_file_path = "/nobackup/users/zfchen/zt/Multimodal-GPT/ann_file.json"
+# ques_file_path = "/nobackup/users/zfchen/zt/Multimodal-GPT/ques_file.json"
+# output_path = "/nobackup/users/zfchen/zt/Multimodal-GPT/output.json"
+result_file_path = "F:/work//Multimodal-GPT/result_file.json"
+ann_file_path = "F:/work//Multimodal-GPT/ann_file.json"
+ques_file_path = "F:/work//Multimodal-GPT/ques_file.json"
+output_path = "F:/work//Multimodal-GPT/output.json"
+
 def get_clevr_question():
     # clevr_path = "F:/work/CLEVR/CLEVR_v1.0/"
     question_path = os.path.join(clevr_path, "questions", "CLEVR_val_questions.json")
@@ -34,7 +39,7 @@ def generate_result_file():
             "answer": output["response"],
             "question_id": i,
         })
-    json.dump(result_list, open(result_file_path, "w"))
+    json.dump(result_list, open(result_file_path, "w"), indent=2)
 
 
 def generate_ann_file():
@@ -51,16 +56,19 @@ def generate_ann_file():
     for i, output in enumerate(outputs):
         if "image_id" not in output:
             output["image_id"] = i
+        answers = []
+        for j in range(1,11):
+            answers.append({"answer_id": j, "answer": output["answer"], "answer_confidence": "yes"})
         ann_list.append({
             "question_id": i,
             "image_id": output["image_id"],
             "question_type": "test-question",
             "answer_type": "other",
-            "answers": [{"answer_id": 1, "answer": output["answer"], "answer_confidence": "yes"}],
+            "answers": answers,
             "multiple_choice_answer": output["answer"]
             })
     ann["annotations"] = ann_list
-    json.dump(ann, open(ann_file_path, "w"))
+    json.dump(ann, open(ann_file_path, "w"), indent=2)
 
 
 def generate_ques_file():
@@ -85,7 +93,7 @@ def generate_ques_file():
             "question": output["question"],
             })
     ques["questions"] = ques_list
-    json.dump(ques, open(ques_file_path, "w"))
+    json.dump(ques, open(ques_file_path, "w"), indent=2)
 
 
 def eval_output():

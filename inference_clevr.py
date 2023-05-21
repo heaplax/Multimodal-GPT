@@ -1,6 +1,6 @@
 import os
 
-from load_clevr import get_clevr_question
+import clevr.load_clevr as lclevr
 import gradio as gr
 import torch
 from PIL import Image
@@ -69,14 +69,21 @@ if __name__ == '__main__':
     state.sep = seperator
     state.buffer_size = history_buffer
 
-    question_list = get_clevr_question()
+    path_info = {
+        "clevr_path": "/nobackup/users/zfchen/zt/clevr/CLEVR_v1.0",
+        "result_file_path": "/nobackup/users/zfchen/zt/Multimodal-GPT/result_file.json",
+        "ann_file_path": "/nobackup/users/zfchen/zt/Multimodal-GPT/ann_file.json",
+        "ques_file_path": "/nobackup/users/zfchen/zt/Multimodal-GPT/ques_file.json",
+        "output_path": "/nobackup/users/zfchen/zt/Multimodal-GPT/output.json",
+    }
+
+    question_list = lclevr.get_clevr_question(path_info)
+    response_list = []
 
     for i, question in enumerate(question_list):
-        question_list[i]["response"] = inference_one(question["image_path"], question["question"], state)
+        response_list.append(inference_one(question["image_path"], question["question"], state))
         if i % 10 == 0:
             print(f"processed {i} questions")
-
-    with open(output_path, "w") as f:
-        json.dump(question_list, f, indent=2)
+    lclevr.generate_output(path_info, response_list)
     # ans = inference_results.strip("#").strip()
     # print(f"ans:{ans}")

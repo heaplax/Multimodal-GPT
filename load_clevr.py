@@ -77,6 +77,8 @@ def generate_ques_file():
     ques_list = []
     outputs = json.load(open(output_path))
     for i, output in enumerate(outputs):
+        if "image_id" not in output:
+            output["image_id"] = i
         ques_list.append({
             "question_id": i,
             "image_id": output["image_id"],

@@ -73,6 +73,8 @@ if __name__ == '__main__':
 
     for i, question in enumerate(question_list):
         question_list[i]["response"] = inference_one(question["image_path"], question["question"], state)
+        if i % 100 == 0:
+            print(f"processed {i} questions")
 
     with open(output_path, "w") as f:
         json.dump(question_list, f, indent=2)

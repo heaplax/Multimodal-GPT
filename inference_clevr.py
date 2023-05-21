@@ -1,6 +1,6 @@
 import os
 
-from load_questions import get_clevr_question
+from load_clevr import get_clevr_question
 import gradio as gr
 import torch
 from PIL import Image

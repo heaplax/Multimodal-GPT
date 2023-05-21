@@ -14,7 +14,7 @@ def get_clevr_question():
             "question": question["question"],
             "answer": question["answer"],
         })
-    return res_list[0:10000]
+    return res_list[0:100]
 
 if __name__ == "__main__":
     print(get_clevr_question()[0:100])

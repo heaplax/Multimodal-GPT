@@ -24,4 +24,6 @@ torchrun --nproc_per_node=4\
     --batch_size 1 \
     --tuning_config configs/lora_config.py \
     --dataset_config configs/dataset_config_clevr.py \
-    --report_to_wandb
+    --report_to_wandb \
+    --workers 8 \
+    --precision fp16

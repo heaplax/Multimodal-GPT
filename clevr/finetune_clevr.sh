@@ -1,4 +1,4 @@
-source /nobackup/users/zitian/code/Heaplax/anaconda3/bin/activate && conda activate && conda activate llava
+source /nobackup/users/zitian/code/Heaplax/anaconda3/bin/activate && conda activate && conda activate openmmlab
 NODE_RANK=${SLURM_PROCID}
 ip2=node${SLURM_NODELIST:5:4}
 NODE_LENGTH=${#SLURM_NODELIST}
